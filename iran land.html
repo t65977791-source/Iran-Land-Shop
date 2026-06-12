@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه ایران‌لند</title>
+    <style>
+        /* تنظیمات کلی برای سازگاری با مرورگرهای قدیمی */
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* کانتینر اصلی */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* هدر و لوگو */
+        .header {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #16213e;
+            border-radius: 15px;
+            border: 1px solid #0f3460;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .coin-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            margin-bottom: 10px;
+            /* اگر عکس لود نشود، یک دایره طلایی نشان می‌دهد */
+            background: #ffd700; 
+        }
+
+        h1 {
+            margin: 10px 0;
+            color: #ffd700;
+            font-size: 24px;
+        }
+
+        /* بخش کد تخفیف */
+        .discount-box {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .discount-box input {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #533483;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .discount-box button {
+            padding: 10px 15px;
+            background: #e94560;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* شبکه کارت‌ها */
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* استایل پایه کارت‌ها */
+        .card {
+            background: #16213e;
+            border-radius: 15px;
+            width: 250px;
+            padding: 20px;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .card .coins {
+            font-size: 16px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .card .coins img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .card .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #fff;
+        }
+
+        .card button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* --- سطح‌بندی رنگ‌ها (از ساده به شیک) --- */
+
+        /* سطح ۱: دیزی (خیلی ساده) */
+        .level-1 { border: 1px solid #555; }
+        .level-1 h3 { color: #aaa; }
+        .level-1 button { background: #555; }
+        .level-1 button:hover { background: #666; }
+
+        /* سطح ۲: گردآفریدون (آبی) */
+        .level-2 { border: 2px solid #2980b9; }
+        .level-2 h3 { color: #3498db; }
+        .level-2 button { background: #2980b9; }
+        .level-2 button:hover { background: #3498db; }
+
+        /* سطح ۳: رستم (قرمز) */
+        .level-3 { border: 2px solid #c0392b; }
+        .level-3 h3 { color: #e74c3c; }
+        .level-3 button { background: #c0392b; }
+        .level-3 button:hover { background: #e74c3c; }
+
+        /* سطح ۴: کاوه (سبز) */
+        .level-4 { border: 2px solid #27ae60; }
+        .level-4 h3 { color: #2ecc71; }
+        .level-4 button { background: #27ae60; }
+        .level-4 button:hover { background: #2ecc71; }
+
+        /* سطح ۵: هایکو آل (بنفش) */
+        .level-5 { border: 2px solid #8e44ad; }
+        .level-5 h3 { color: #9b59b6; }
+        .level-5 button { background: #8e44ad; }
+        .level-5 button:hover { background: #9b59b6; }
+
+        /* سطح ۶: نفرین شده (گرادیانت طلایی و قرمز - خیلی شیک) */
+        .level-6 { 
+            border: 2px solid #f1c40f; 
+            background: linear-gradient(to bottom, #2c3e50, #000000);
+        }
+        .level-6 h3 { color: #f1c40f; text-shadow: 0 0 5px #f1c40f; }
+        .level-6 button { 
+            background: linear-gradient(to right, #c0392b, #8e44ad); 
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+        }
+        .level-6 button:hover { box-shadow: 0 0 15px rgba(241, 196, 15, 0.8); }
+
+        /* سطح ۷: مجوز پلیس (ویژه و طلایی) */
+        .level-7 { 
+            width: 100%; 
+            max-width: 500px;
+            border: 3px solid #ffd700; 
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        .level-7 h3 { color: #ffd700; font-size: 22px; }
+        .level-7 button { 
+            background: linear-gradient(to right, #f1c40f, #f39c12); 
+            color: #000;
+            font-size: 18px;
+        }
+        .level-7 button:hover { background: #fff; }
+
+        /* مودال (پنجره پاپ‌آپ) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            color: #333;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .close {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover { color: black; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- هدر -->
+        <div class="header">
+            <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg" alt="سکه" class="coin-logo">
+            <h1>فروشگاه ایران‌لند</h1>
+            <p>خرید سکه و آیتم‌های ویژه</p>
+        </div>
+
+        <!-- بخش کد تخفیف -->
+        <div class="discount-box">
+            <input type="text" placeholder="کد تخفیف را وارد کنید...">
+            <button onclick="alert('کد تخفیفی وجود ندارد!')">اعمال کد</button>
+        </div>
+
+        <!-- لیست بسته‌ها -->
+        <div class="cards-grid">
+            
+            <!-- بسته ۱: دیزی (ساده) -->
+            <div class="card level-1">
+                <h3>بسته دیزی</h3>
+                <div class="coins">
+                    <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg">
+                    ۱۰۰۰ سکه
+                </div>
+                <div class="price">۱۰,۰۰۰ تومان</div>
+                <button onclick="showModal()">خرید</button>
+            </div>
+
+            <!-- بسته ۲: گردآفریدون (آبی) -->
+            <div class="card level-2">
+                <h3>بسته گردآفریدون</h3>
+                <div class="coins">
+                    <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg">
+                    ۵,۰۰۰ سکه
+                </div>
+                <div class="price">۳۰,۰۰۰ تومان</div>
+                <button onclick="showModal()">خرید</button>
+            </div>
+
+            <!-- بسته ۳: رستم (قرمز) -->
+            <div class="card level-3">
+                <h3>بسته رستم</h3>
+                <div class="coins">
+                    <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg">
+                    ۱۰,۰۰۰ سکه
+                </div>
+                <div class="price">۶۰,۰۰۰ تومان</div>
+                <button onclick="showModal()">خرید</button>
+            </div>
+
+            <!-- بسته ۴: کاوه آهنگر (سبز) -->
+            <div class="card level-4">
+                <h3>بسته کاوه آهنگر</h3>
+                <div class="coins">
+                    <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg">
+                    ۵۰,۰۰۰ سکه
+                </div>
+                <div class="price">۲۱۰,۰۰۰ تومان</div>
+                <button onclick="showModal()">خرید</button>
+            </div>
+
+            <!-- بسته ۵: هایکو آل (بنفش) -->
+            <div class="card level-5">
+                <h3>بسته هایکو آل</h3>
+                <div class="coins">
+                    <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg">
+                    ۱۰۰,۰۰۰ سکه
+                </div>
+                <div class="price">۴۲۰,۰۰۰ تومان</div>
+                <button onclick="showModal()">خرید</button>
+            </div>
+
+            <!-- بسته ۶: نفرین شده (شیک و طلایی/قرمز) -->
+            <div class="card level-6">
+                <h3>بسته نفرین شده</h3>
+                <div class="coins">
+                    <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg">
+                    ۱,۰۰۰,۰۰۰ سکه
+                </div>
+                <div class="price">۹۸۰,۰۰۰ تومان</div>
+                <button onclick="showModal()">خرید</button>
+            </div>
+
+            <!-- بسته ۷: مجوز پلیس (ویژه و بزرگ) -->
+            <div class="card level-7">
+                <h3>مجوز پلیس (ویژه)</h3>
+                <div class="coins">
+                    <img src="https://cdn.imgurl.ir/uploads/i655592_IMG_20260506_211118_472.jpg">
+                    دسترسی ویژه
+                </div>
+                <div class="price">۲۰۰,۰۰۰ تومان</div>
+                <button onclick="showModal()">خرید ویژه</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- پنجره پاپ‌آپ -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p style="font-size: 24px; font-weight: bold; color: #333;">به زودی……</p>
+        </div>
+    </div>
+
+    <script>
+        // تابع باز کردن مودال
+        function showModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        // تابع بستن مودال
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        // بستن مودال اگر بیرون کادر کلیک شد
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
